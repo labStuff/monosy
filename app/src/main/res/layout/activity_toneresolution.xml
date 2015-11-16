@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:background="@color/blue">
+
+        <ImageView
+            android:id="@+id/imageView_back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/ic_arrow_back_white_24dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/tone_resolution_test"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_x_large"/>
+
+        <ImageView
+            android:id="@+id/imageview_menu"
+            style="@style/imageview_common_style"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_overflow"/>
+
+        <ImageView
+            android:id="@+id/imageview_save"
+            style="@style/imageview_common_style"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@id/imageview_menu"
+            android:src="@drawable/ic_action_save"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView_frequency_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="当前频点：125Hz(1/11)"
+        android:textSize="@dimen/text_size_large"/>
+
+    <com.lixinyuyin.monosyllabicdetect.view.ToneResolutionGraph
+        android:id="@+id/tone_resolution_graph"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/textView_frequency_info"
+        widget:grid_color="#ffaa55"
+        widget:targetline_color="#ff0000"/>
+
+    <TextView
+        android:id="@+id/textView_volume_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tone_resolution_graph"
+        android:layout_marginLeft="16dp"
+        android:text="@string/volume_hint"
+        android:textSize="@dimen/text_size_medium"/>
+
+    <com.lixinyuyin.monosyllabicdetect.view.slider.Slider
+        android:id="@+id/slider_volume"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_volume_hint"
+        android:layout_centerHorizontal="true"
+        android:background="@color/blue"
+        widget:max="15"
+        widget:min="1"
+        widget:showNumberIndicator="true"/>
+
+    <LinearLayout
+        android:id="@+id/fre_control_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/slider_volume"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textview_adjustfre"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:gravity="center"
+            android:text="@string/adjustFre"
+            android:textSize="@dimen/text_size_medium"/>
+
+        <Button
+            android:id="@+id/button_fre_minus"
+            style="@style/control_button_style"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/frequency_minus_icon"/>
+
+        <Button
+            android:id="@+id/button_fre_add"
+            style="@style/control_button_style"
+            android:layout_marginLeft="60dp"
+            android:background="@drawable/frequency_add_icon"/>
+
+        <Button
+            android:id="@+id/button_play"
+            style="@style/control_button_large_style"
+            android:layout_marginLeft="40dp"
+            android:background="@drawable/ic_state_pausing"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView_play_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fre_control_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="@string/not_play"
+        android:textSize="@dimen/text_size_small"/>
+
+    <TextView
+        android:id="@+id/textView_clickHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_play_hint"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/choose_hint"
+        android:textSize="@dimen/text_size_small"/>
+
+    <Button
+        android:id="@+id/button_same"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_clickHint"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:clickable="false"
+        android:text="@string/same"/>
+
+    <Button
+        android:id="@+id/button_different"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/button_same"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"
+        android:clickable="false"
+        android:text="@string/different"/>
+
+    <com.lixinyuyin.monosyllabicdetect.view.ThreeIndicator
+        android:id="@+id/three_indicators"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp">
+
+    </com.lixinyuyin.monosyllabicdetect.view.ThreeIndicator>
+</RelativeLayout>

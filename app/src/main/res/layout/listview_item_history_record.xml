@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/textview_year_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_x_large"/>
+
+    <TextView
+        android:id="@+id/textview_day_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_year_info"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/blue_100"
+        android:textSize="@dimen/text_size_medium"/>
+</RelativeLayout>

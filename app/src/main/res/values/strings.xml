@@ -1,0 +1,56 @@
+<resources>
+
+    <string name="app_name">MonosyllabicDetect</string>
+
+    <!-- Login Activity Start-->
+    <string name="login">登录</string>
+    <string name="username">用户名</string>
+    <string name="password">密  码</string>
+    <string name="register">注册</string>
+    <!-- Login Activity End-->
+
+    <!-- Register Activity Start -->
+    <string name="re_password">确认密码</string>
+    <string name="register_succeed">注册成功</string>
+    <string name="input_error">某项为空或两次密码不一致！！</string>
+    <string name="already_exists">用户名已存在！！</string>
+    <string name="login_error">用户名或密码错误！</string>
+    <!-- Register Activity End -->
+
+
+    <!-- Main Activity Start -->
+    <string name="app_title">纯音听力测试</string>
+    <string name="wavInfoHint">频率：%1$dHz音量：%2$ddB</string>
+    <string name="adjustFre">频率切换:</string>
+    <string name="adjustVolumeX">音量粗调(10X):</string>
+    <string name="adjustVolumex">音量细调(1X):</string>
+    <string name="volume_min">刚听到</string>
+    <string name="volume_medium">适中</string>
+    <string name="volume_max">太响了</string>
+    <string name="history">历史记录</string>
+    <string name="exit">退出</string>
+    <string name="delete">删除</string>
+    <string name="sure">确定</string>
+    <string name="cancel">取消</string>
+    <string name="cancel_message">确认删除？</string>
+    <!-- Main Activity End -->
+
+    <!-- Tone Resolution Activity Start -->
+    <string name="frequency_info">当前频点：%1$dHz(%2$d/11)</string>
+    <string name="volume_hint">选择合适的音量</string>
+    <string name="not_play">未播放</string>
+    <string name="playing">播放中...</string>
+    <string name="choose_hint">点击播放键，等待声音播放完后选择所听到的前后两段声音是否有区别</string>
+    <string name="same">相同</string>
+    <string name="different">不同</string>
+    <!-- Tone Resolution Activity End -->
+
+    <!-- Option Activity Start-->
+    <string name="pure_tone_test">纯音听力测试</string>
+    <string name="calibration">声压级校准</string>
+    <string name="tone_resolution_test">音调分辨率测试</string>
+    <string name="user_info_hint">,欢迎使用^_^</string>
+    <string name="account_switch">账户切换</string>
+    <!-- Option Activity End-->
+
+</resources>
