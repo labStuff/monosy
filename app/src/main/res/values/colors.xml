@@ -16,4 +16,5 @@
     <color name="black_500">#9e9e9e</color>
     <color name="black_700">#616161</color>
     <color name="material_dialog_thumbColor">#66aaaaaa</color>
+    <color name="pink">#aa55ff</color>
 </resources>

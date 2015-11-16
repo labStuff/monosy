@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.lixinyuyin.monosyllabicdetect.R;
+import com.lixinyuyin.monosyllabicdetect.activity.language.rate.LanguageRecRate;
 import com.lixinyuyin.monosyllabicdetect.activity.pure.PureToneTestActivity;
 import com.lixinyuyin.monosyllabicdetect.activity.resolution.ToneResolutionActivity;
 import com.lixinyuyin.monosyllabicdetect.model.VAccount;
@@ -22,7 +23,7 @@ public class OptionActivity extends Activity implements View.OnClickListener {
     Button toneResolution;
     Button pureToneTest;
     Button accountSwitch;
-
+    Button languageRecRate;
     TextView userInfoTextView;
 
     @Override
@@ -41,6 +42,9 @@ public class OptionActivity extends Activity implements View.OnClickListener {
         userInfoTextView = (TextView) findViewById(R.id.textView_userInfo);
         userInfoTextView.setText(VAccount.getUserName() + getString(R.string.user_info_hint));
 
+        languageRecRate = (Button) findViewById(R.id.button_language_rec_rate);
+        languageRecRate.setOnClickListener(this);
+
         accountSwitch = (Button) findViewById(R.id.button_account_switch);
         accountSwitch.setOnClickListener(this);
     }
@@ -55,6 +59,8 @@ public class OptionActivity extends Activity implements View.OnClickListener {
             LoginActivity.start(this);
             VAccount.clear();
             finish();
+        } else if (v == languageRecRate) {
+            LanguageRecRate.start(this);
         }
     }
 

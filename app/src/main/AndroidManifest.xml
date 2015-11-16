@@ -47,6 +47,9 @@
         <activity
             android:name=".activity.OptionActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.language.rate.LanguageRecRate"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
