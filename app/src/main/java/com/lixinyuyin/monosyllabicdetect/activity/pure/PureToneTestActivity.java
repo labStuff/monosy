@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.lixinyuyin.monosyllabicdetect.R;
 import com.lixinyuyin.monosyllabicdetect.database.graphdata.GraphDataDao;
 import com.lixinyuyin.monosyllabicdetect.model.VAccount;
+import com.lixinyuyin.monosyllabicdetect.util.StatusBarUtil;
 import com.lixinyuyin.monosyllabicdetect.view.GraphData;
 import com.lixinyuyin.monosyllabicdetect.view.PureToneGraph;
 import com.lixinyuyin.monosyllabicdetect.view.slider.Slider;
@@ -69,8 +70,8 @@ public class PureToneTestActivity extends Activity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().hide();
         setContentView(R.layout.main_activity);
+        StatusBarUtil.setStatusBarColor(this);
         initView();
         initData();
         onClick(addButton);

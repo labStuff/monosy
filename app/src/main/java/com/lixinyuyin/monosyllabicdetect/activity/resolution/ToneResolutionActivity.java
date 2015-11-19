@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lixinyuyin.monosyllabicdetect.R;
+import com.lixinyuyin.monosyllabicdetect.util.StatusBarUtil;
 import com.lixinyuyin.monosyllabicdetect.util.ToastUtil;
 import com.lixinyuyin.monosyllabicdetect.view.ThreeIndicator;
 import com.lixinyuyin.monosyllabicdetect.view.ToneResolutionGraph;
@@ -91,8 +92,8 @@ public class ToneResolutionActivity extends Activity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().hide();
         setContentView(R.layout.activity_toneresolution);
+        StatusBarUtil.setStatusBarColor(this);
         initView();
         initData();
         indicator.show(mStageIndicator);

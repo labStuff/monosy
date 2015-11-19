@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.lixinyuyin.monosyllabicdetect.R;
 import com.lixinyuyin.monosyllabicdetect.database.graphdata.GraphDataDao;
+import com.lixinyuyin.monosyllabicdetect.util.StatusBarUtil;
 import com.lixinyuyin.monosyllabicdetect.view.GraphData;
 
 import java.util.List;
@@ -31,8 +32,8 @@ public class HistoryRecordActivity extends Activity implements AdapterView.OnIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().hide();
         setContentView(R.layout.history_record_activity);
+        StatusBarUtil.setStatusBarColor(this);
         initView();
         initData();
     }

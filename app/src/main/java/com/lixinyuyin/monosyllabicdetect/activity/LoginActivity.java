@@ -5,27 +5,32 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.lixinyuyin.monosyllabicdetect.R;
 import com.lixinyuyin.monosyllabicdetect.database.userdata.UserDao;
+import com.lixinyuyin.monosyllabicdetect.listener.DelayClickListener;
 import com.lixinyuyin.monosyllabicdetect.model.VAccount;
+import com.lixinyuyin.monosyllabicdetect.util.StatusBarUtil;
 import com.lixinyuyin.monosyllabicdetect.util.ToastUtil;
+import com.lixinyuyin.monosyllabicdetect.view.FloatingEditText;
+import com.lixinyuyin.monosyllabicdetect.view.PaperButton;
 
 /**
  * Created by Administrator on 2015/8/14.
  */
-public class LoginActivity extends Activity implements View.OnClickListener {
+public class LoginActivity extends Activity {
 
-    Button registerButton;
-    Button loginButton;
+    private final int mDelay = 500;
 
-    EditText userNameEditText;
-    EditText passwordEditText;
+    PaperButton registerButton;
+    PaperButton loginButton;
+
+    FloatingEditText userNameEditText;
+    FloatingEditText passwordEditText;
 
     private String userName;
     private String passWord;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,43 +39,46 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             finish();
         }
         super.onCreate(savedInstanceState);
-        getActionBar().hide();
         setContentView(R.layout.activity_login);
+        StatusBarUtil.setStatusBarColor(this);
         initView();
+        mContext = this;
     }
 
     private void initView() {
-        registerButton = (Button) findViewById(R.id.button_register);
-        registerButton.setOnClickListener(this);
-        loginButton = (Button) findViewById(R.id.button_login);
-        loginButton.setOnClickListener(this);
-
-        userNameEditText = (EditText) findViewById(R.id.edittext_username);
-        passwordEditText = (EditText) findViewById(R.id.edittext_password);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v == registerButton) {
-            RegisterActivity.start(this);
-        } else if (v == loginButton) {
-            if (checkInput()) {
-                UserDao userDao = new UserDao(this);
-                if (userDao.isValid(userName, passWord)) {
-                    userDao.close();
-                    VAccount account = new VAccount(userName, passWord);
-                    VAccount.saveAccount(account);
-                    OptionActivity.start(this);
-                    finish();
-                } else {
-                    ToastUtil.toast(this, R.string.login_error);
-                    userDao.close();
-                }
-            } else {
-                ToastUtil.toast(this, R.string.input_error);
+        registerButton = (PaperButton) findViewById(R.id.button_register);
+        registerButton.setOnClickListener(new DelayClickListener(mDelay) {
+            @Override
+            public void doClick(View v) {
+                RegisterActivity.start(mContext);
             }
-        }
+        });
+        loginButton = (PaperButton) findViewById(R.id.button_login);
+        loginButton.setOnClickListener(new DelayClickListener(mDelay) {
+            @Override
+            public void doClick(View v) {
+                if (checkInput()) {
+                    UserDao userDao = new UserDao(mContext);
+                    if (userDao.isValid(userName, passWord)) {
+                        userDao.close();
+                        VAccount account = new VAccount(userName, passWord);
+                        VAccount.saveAccount(account);
+                        OptionActivity.start(mContext);
+                        finish();
+                    } else {
+                        ToastUtil.toast(mContext, R.string.login_error);
+                        userDao.close();
+                    }
+                } else {
+                    ToastUtil.toast(mContext, R.string.input_error);
+                }
+            }
+        });
+
+        userNameEditText = (FloatingEditText) findViewById(R.id.edittext_username);
+        passwordEditText = (FloatingEditText) findViewById(R.id.edittext_password);
     }
+
 
     private boolean checkInput() {
         userName = userNameEditText.getText().toString();

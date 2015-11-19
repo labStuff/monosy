@@ -1,61 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-    <Button
-        android:id="@+id/button_test_resolution"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/tone_resolution_test"/>
-
-    <Button
-        android:id="@+id/button_pure_tone_test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/button_test_resolution"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:text="@string/pure_tone_test"/>
-
-    <Button
-        android:id="@+id/button_language_rec_rate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/button_test_resolution"
-        android:layout_below="@id/button_test_resolution"
-        android:layout_marginTop="20dp"
-        android:text="@string/language_recognize_rate"/>
-
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/gray_1">
 
     <TextView
-        android:id="@+id/textView_userInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"/>
+        android:id="@+id/textView_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:background="@color/blue"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_x_large"/>
+
+    <com.lixinyuyin.monosyllabicdetect.view.PaperButton
+        android:id="@+id/button_test_resolution"
+        style="@style/common_paper_button"
+        android:layout_marginTop="80dp"
+        app:paper_text="@string/tone_resolution_test"/>
+
+    <com.lixinyuyin.monosyllabicdetect.view.PaperButton
+        android:id="@+id/button_pure_tone_test"
+        style="@style/common_paper_button"
+        android:layout_below="@id/button_test_resolution"
+        android:layout_marginTop="20dp"
+        app:paper_text="@string/pure_tone_test"/>
+
+    <com.lixinyuyin.monosyllabicdetect.view.PaperButton
+        android:id="@+id/button_language_rec_rate"
+        style="@style/common_paper_button"
+        android:layout_below="@id/button_pure_tone_test"
+        android:layout_marginTop="20dp"
+        app:paper_text="@string/language_recognize_rate"/>
 
 
-    <Button
+    <com.lixinyuyin.monosyllabicdetect.view.PaperButton
+        android:id="@+id/button_calibration"
+        style="@style/common_paper_button"
+        android:layout_below="@id/button_language_rec_rate"
+        android:layout_marginTop="20dp"
+        app:paper_text="@string/calibration"/>
+
+    <com.lixinyuyin.monosyllabicdetect.view.PaperButton
         android:id="@+id/button_account_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/common_paper_button"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="50dp"
-        android:layout_marginLeft="20dp"
-        android:text="@string/account_switch"/>
+        app:paper_text="@string/account_switch"/>
 
-    <Button
-        android:id="@+id/button_calibration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/button_account_switch"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:text="@string/calibration"/>
 
 </RelativeLayout>

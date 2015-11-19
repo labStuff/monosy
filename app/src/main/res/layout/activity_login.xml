@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <RelativeLayout
         android:id="@+id/title_bar"
@@ -20,64 +22,33 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/textview_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title_bar"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="150dp"
-        android:text="@string/username"
-        android:textSize="@dimen/text_size_medium"/>
 
-    <EditText
+    <com.lixinyuyin.monosyllabicdetect.view.FloatingEditText
         android:id="@+id/edittext_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textview_username"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="40dp"
-        android:layout_toRightOf="@+id/textview_username"
-        android:inputType="text"
-        android:maxLength="10"/>
+        style="@style/common_edittext"
+        android:layout_marginTop="150dp"
+        android:hint="@string/username"/>
 
-    <TextView
-        android:id="@+id/textview_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textview_username"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/password"
-        android:textSize="@dimen/text_size_medium"/>
-
-    <EditText
+    <com.lixinyuyin.monosyllabicdetect.view.FloatingEditText
         android:id="@+id/edittext_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textview_password"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="40dp"
-        android:layout_toRightOf="@+id/textview_username"
-        android:inputType="textPassword"
-        android:maxLength="6"/>
-
-    <Button
-        android:id="@+id/button_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textview_password"
-        android:layout_marginLeft="60dp"
+        style="@style/common_edittext"
+        android:layout_below="@id/edittext_username"
         android:layout_marginTop="20dp"
-        android:text="@string/login"/>
+        android:hint="@string/password"/>
 
-    <Button
+    <com.lixinyuyin.monosyllabicdetect.view.PaperButton
+        android:id="@+id/button_login"
+        style="@style/common_paper_button"
+        android:layout_below="@+id/edittext_password"
+        android:layout_marginTop="20dp"
+        app:paper_text="@string/login"/>
+
+    <com.lixinyuyin.monosyllabicdetect.view.PaperButton
         android:id="@+id/button_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/button_login"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="60dp"
-        android:text="@string/register"/>
+        style="@style/common_paper_button"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        app:paper_color="@color/gray_5"
+        app:paper_text="@string/register"/>
 
 </RelativeLayout>

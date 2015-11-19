@@ -5,13 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.lixinyuyin.monosyllabicdetect.R;
 import com.lixinyuyin.monosyllabicdetect.database.userdata.UserDao;
+import com.lixinyuyin.monosyllabicdetect.listener.DelayClickListener;
+import com.lixinyuyin.monosyllabicdetect.util.StatusBarUtil;
 import com.lixinyuyin.monosyllabicdetect.util.ToastUtil;
+import com.lixinyuyin.monosyllabicdetect.view.FloatingEditText;
+import com.lixinyuyin.monosyllabicdetect.view.PaperButton;
 
 /**
  * Created by Administrator on 2015/8/14.
@@ -19,54 +21,59 @@ import com.lixinyuyin.monosyllabicdetect.util.ToastUtil;
 public class RegisterActivity extends Activity implements View.OnClickListener {
 
     ImageView backImageView;
-    Button registerButton;
-    EditText usernameEditText;
-    EditText passwordEditText;
-    EditText rePasswordEditText;
+    PaperButton registerButton;
+    FloatingEditText usernameEditText;
+    FloatingEditText passwordEditText;
+    FloatingEditText rePasswordEditText;
 
     String userName;
     String passWord;
     String rePassword;
 
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().hide();
         setContentView(R.layout.activity_register);
+        StatusBarUtil.setStatusBarColor(this);
         initView();
+        mContext = this;
     }
 
     private void initView() {
         backImageView = (ImageView) findViewById(R.id.imageView_back);
         backImageView.setOnClickListener(this);
-        registerButton = (Button) findViewById(R.id.button_register);
-        registerButton.setOnClickListener(this);
-        usernameEditText = (EditText) findViewById(R.id.edittext_username);
-        passwordEditText = (EditText) findViewById(R.id.edittext_password);
-        rePasswordEditText = (EditText) findViewById(R.id.edittext_repassword);
+        registerButton = (PaperButton) findViewById(R.id.button_register);
+        registerButton.setOnClickListener(new DelayClickListener(500) {
+            @Override
+            public void doClick(View v) {
+                if (checkInput()) {
+                    UserDao userDao = new UserDao(mContext);
+                    if (userDao.isExists(userName)) {
+                        ToastUtil.toast(mContext, R.string.already_exists);
+                        userDao.close();
+                        return;
+                    }
+                    userDao.add(userName, passWord);
+                    userDao.close();
+                    ToastUtil.toast(mContext, R.string.register_succeed);
+                    finish();
+                } else {
+                    ToastUtil.toast(mContext, R.string.input_error);
+                    return;
+                }
+            }
+        });
+        usernameEditText = (FloatingEditText) findViewById(R.id.edittext_username);
+        passwordEditText = (FloatingEditText) findViewById(R.id.edittext_password);
+        rePasswordEditText = (FloatingEditText) findViewById(R.id.edittext_repassword);
     }
 
     @Override
     public void onClick(View v) {
         if (v == backImageView) {
             finish();
-        } else if (v == registerButton) {
-            if (checkInput()) {
-                UserDao userDao = new UserDao(this);
-                if (userDao.isExists(userName)) {
-                    ToastUtil.toast(this, R.string.already_exists);
-                    userDao.close();
-                    return;
-                }
-                userDao.add(userName, passWord);
-                userDao.close();
-                ToastUtil.toast(this, R.string.register_succeed);
-                finish();
-            } else {
-                ToastUtil.toast(this, R.string.input_error);
-                return;
-            }
         }
     }
 

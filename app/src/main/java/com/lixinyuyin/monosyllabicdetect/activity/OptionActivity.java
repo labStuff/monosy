@@ -5,63 +5,78 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.lixinyuyin.monosyllabicdetect.R;
-import com.lixinyuyin.monosyllabicdetect.activity.language.rate.LanguageRecRate;
 import com.lixinyuyin.monosyllabicdetect.activity.pure.PureToneTestActivity;
 import com.lixinyuyin.monosyllabicdetect.activity.resolution.ToneResolutionActivity;
+import com.lixinyuyin.monosyllabicdetect.activity.speech.rate.SpeechRecRate;
+import com.lixinyuyin.monosyllabicdetect.listener.DelayClickListener;
 import com.lixinyuyin.monosyllabicdetect.model.VAccount;
+import com.lixinyuyin.monosyllabicdetect.util.StatusBarUtil;
+import com.lixinyuyin.monosyllabicdetect.view.PaperButton;
 
 
 /**
  * Created by zqj on 2015/8/24 10:06.
  */
-public class OptionActivity extends Activity implements View.OnClickListener {
+public class OptionActivity extends Activity {
 
-    Button toneResolution;
-    Button pureToneTest;
-    Button accountSwitch;
-    Button languageRecRate;
-    TextView userInfoTextView;
+    private final int mDelay = 500;
+
+    PaperButton toneResolution;
+    PaperButton pureToneTest;
+    PaperButton accountSwitch;
+    PaperButton languageRecRate;
+    TextView title;
+
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_option);
+        StatusBarUtil.setStatusBarColor(this);
         initView();
+        mContext = this;
     }
 
     private void initView() {
-        toneResolution = (Button) findViewById(R.id.button_test_resolution);
-        toneResolution.setOnClickListener(this);
-        pureToneTest = (Button) findViewById(R.id.button_pure_tone_test);
-        pureToneTest.setOnClickListener(this);
+        toneResolution = (PaperButton) findViewById(R.id.button_test_resolution);
+        toneResolution.setOnClickListener(new DelayClickListener(mDelay) {
+            @Override
+            public void doClick(View v) {
+                ToneResolutionActivity.start(mContext);
+            }
+        });
+        pureToneTest = (PaperButton) findViewById(R.id.button_pure_tone_test);
+        pureToneTest.setOnClickListener(new DelayClickListener(mDelay) {
+            @Override
+            public void doClick(View v) {
+                PureToneTestActivity.start(mContext, VAccount.getUserName());
+            }
+        });
 
-        userInfoTextView = (TextView) findViewById(R.id.textView_userInfo);
-        userInfoTextView.setText(VAccount.getUserName() + getString(R.string.user_info_hint));
+        title = (TextView) findViewById(R.id.textView_title);
+        title.setText(VAccount.getUserName() + getString(R.string.user_info_hint));
 
-        languageRecRate = (Button) findViewById(R.id.button_language_rec_rate);
-        languageRecRate.setOnClickListener(this);
+        languageRecRate = (PaperButton) findViewById(R.id.button_language_rec_rate);
+        languageRecRate.setOnClickListener(new DelayClickListener(mDelay) {
+            @Override
+            public void doClick(View v) {
+                SpeechRecRate.start(mContext);
+            }
+        });
 
-        accountSwitch = (Button) findViewById(R.id.button_account_switch);
-        accountSwitch.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v == toneResolution) {
-            ToneResolutionActivity.start(this);
-        } else if (v == pureToneTest) {
-            PureToneTestActivity.start(this, VAccount.getUserName());
-        } else if (v == accountSwitch) {
-            LoginActivity.start(this);
-            VAccount.clear();
-            finish();
-        } else if (v == languageRecRate) {
-            LanguageRecRate.start(this);
-        }
+        accountSwitch = (PaperButton) findViewById(R.id.button_account_switch);
+        accountSwitch.setOnClickListener(new DelayClickListener(mDelay) {
+            @Override
+            public void doClick(View v) {
+                LoginActivity.start(mContext);
+                VAccount.clear();
+                finish();
+            }
+        });
     }
 
     public static void start(Context context) {

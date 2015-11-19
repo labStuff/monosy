@@ -51,7 +51,7 @@
     <string name="tone_resolution_test">音调分辨率测试</string>
     <string name="user_info_hint">,欢迎使用^_^</string>
     <string name="account_switch">账户切换</string>
-    <string name="language_recognize_rate">言语识别率</string>
+    <string name="language_recognize_rate">言语识别率测试</string>
     <!-- Option Activity End-->
 
     <!-- Language Recognize Rate Start-->

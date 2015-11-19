@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <color name="blue">#994277ff</color>
+    <color name="blue">#3F51B5</color>
+    <color name="blue_dark">#303F9F</color>
     <color name="blue_100">#4277ff</color>
     <color name="white">#ffffff</color>
     <color name="red">#ff0000</color>
     <color name="gray_5">#5555</color>
+    <color name="gray_1">#1555</color>
     <color name="gray_b">#b555</color>
     <color name="black">#000000</color>
     <color name="black_50">#fafafa</color>
@@ -16,5 +17,6 @@
     <color name="black_500">#9e9e9e</color>
     <color name="black_700">#616161</color>
     <color name="material_dialog_thumbColor">#66aaaaaa</color>
+    <color name="green_dark">#aa77ff11</color>
     <color name="pink">#aa55ff</color>
 </resources>
