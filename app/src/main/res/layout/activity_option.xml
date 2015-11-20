@@ -48,7 +48,7 @@
         android:id="@+id/button_account_switch"
         style="@style/common_paper_button"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="60dp"
         app:paper_text="@string/account_switch"/>
 
 

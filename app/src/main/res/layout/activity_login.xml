@@ -47,8 +47,14 @@
         android:id="@+id/button_register"
         style="@style/common_paper_button"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="40dp"
-        app:paper_color="@color/gray_5"
+        android:layout_marginBottom="60dp"
+        app:paper_color="@color/gray_1"
         app:paper_text="@string/register"/>
-
+    <TextView
+        style="@style/common_tip_textview"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:text="@string/comm_copyright"
+        android:textColor="@color/black_500"
+        android:textSize="@dimen/text_size_micro"/>
 </RelativeLayout>

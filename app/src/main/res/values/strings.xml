@@ -56,6 +56,11 @@
 
     <!-- Language Recognize Rate Start-->
     <string name="next">NextWord</string>
+    <string name="result" formatted="false">本次测试共有%1$d项，回答正确%2$d项，正确率%3$.1f%%</string>
     <!-- Language Recognize Rate End-->
+
+    <!-- comm start-->
+    <string name="comm_copyright">Copyright© 2015-2020 南京宇音力新电子科技有限公司.\nAll Rights Reserved.</string>
+    <!-- comm end-->
 
 </resources>

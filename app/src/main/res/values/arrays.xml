@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Male_track01_words">
+        <item>ai爱</item>
+        <item>bi比</item>
+        <item>bu不</item>
+        <item>chan产</item>
+        <item>ci次</item>
+        <item>de得</item>
+        <item>dian电</item>
+        <item>diao掉</item>
+        <item>ding定</item>
+        <item>dong冻</item>
+        <item>du度</item>
+        <item>duo多</item>
+        <item>fen分</item>
+        <item>ge哥</item>
+        <item>guo果</item>
+        <item>hai还</item>
+        <item>he和</item>
+        <item>ji鸡</item>
+        <item>jie阶</item>
+        <item>jing经</item>
+        <item>ke科</item>
+        <item>le乐</item>
+        <item>li利</item>
+        <item>ma妈</item>
+        <item>neng能</item>
+        <item>pa怕</item>
+        <item>qi起</item>
+        <item>qu去</item>
+        <item>ri日</item>
+        <item>se色</item>
+        <item>shan山</item>
+        <item>shang上</item>
+        <item>shi时</item>
+        <item>shu树</item>
+        <item>tiao跳</item>
+        <item>tong同</item>
+        <item>wei维</item>
+        <item>xia下</item>
+        <item>xiang想</item>
+        <item>yan严</item>
+        <item>yin因</item>
+        <item>yong勇</item>
+        <item>you又</item>
+        <item>zao早</item>
+        <item>ze则</item>
+        <item>zhe者</item>
+        <item>zhi之</item>
+        <item>zhi值</item>
+        <item>zhong中</item>
+        <item>zi子 </item>
+    </string-array>
+
+</resources>
