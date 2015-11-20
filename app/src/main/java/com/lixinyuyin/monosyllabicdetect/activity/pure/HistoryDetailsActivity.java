@@ -15,7 +15,7 @@ import com.lixinyuyin.monosyllabicdetect.database.graphdata.GraphDataDao;
 import com.lixinyuyin.monosyllabicdetect.util.StatusBarUtil;
 import com.lixinyuyin.monosyllabicdetect.view.GraphData;
 import com.lixinyuyin.monosyllabicdetect.view.PureToneGraph;
-import com.lixinyuyin.monosyllabicdetect.view.MaterialDialog;
+import com.lixinyuyin.monosyllabicdetect.view.dialog.MaterialDialog;
 
 /**
  * Created by Administrator on 2015/7/30.
