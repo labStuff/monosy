@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
             android:background="@color/blue"
-            widget:max="9"
+            widget:max="5"
             widget:min="0"
             widget:showNumberIndicator="true"/>
 

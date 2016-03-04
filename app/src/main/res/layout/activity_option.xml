@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:background="@color/gray_1">
+    android:background="@color/gray_1"
+    android:fitsSystemWindows="true">
 
     <TextView
         android:id="@+id/textView_title"
@@ -36,11 +36,18 @@
         android:layout_marginTop="20dp"
         app:paper_text="@string/language_recognize_rate"/>
 
+    <com.lixinyuyin.monosyllabicdetect.view.PaperButton
+        android:id="@+id/button_speech_rec_threshold"
+        style="@style/common_paper_button"
+        android:layout_below="@id/button_language_rec_rate"
+        android:layout_marginTop="20dp"
+        app:paper_text="@string/speech_recognize_threshold"/>
+
 
     <com.lixinyuyin.monosyllabicdetect.view.PaperButton
         android:id="@+id/button_calibration"
         style="@style/common_paper_button"
-        android:layout_below="@id/button_language_rec_rate"
+        android:layout_below="@id/button_speech_rec_threshold"
         android:layout_marginTop="20dp"
         app:paper_text="@string/calibration"/>
 

@@ -11,6 +11,7 @@ import com.lixinyuyin.monosyllabicdetect.R;
 import com.lixinyuyin.monosyllabicdetect.activity.pure.PureToneTestActivity;
 import com.lixinyuyin.monosyllabicdetect.activity.resolution.ToneResolutionActivity;
 import com.lixinyuyin.monosyllabicdetect.activity.speech.rate.SpeechRecRate;
+import com.lixinyuyin.monosyllabicdetect.activity.speech.threshold.Threshold;
 import com.lixinyuyin.monosyllabicdetect.listener.DelayClickListener;
 import com.lixinyuyin.monosyllabicdetect.model.VAccount;
 import com.lixinyuyin.monosyllabicdetect.util.StatusBarUtil;
@@ -27,7 +28,9 @@ public class OptionActivity extends Activity {
     PaperButton toneResolution;
     PaperButton pureToneTest;
     PaperButton accountSwitch;
-    PaperButton languageRecRate;
+    PaperButton speechRecRate;
+    PaperButton speechThreshold;
+    PaperButton calibration;
     TextView title;
 
     private Context mContext;
@@ -60,8 +63,8 @@ public class OptionActivity extends Activity {
         title = (TextView) findViewById(R.id.textView_title);
         title.setText(VAccount.getUserName() + getString(R.string.user_info_hint));
 
-        languageRecRate = (PaperButton) findViewById(R.id.button_language_rec_rate);
-        languageRecRate.setOnClickListener(new DelayClickListener(mDelay) {
+        speechRecRate = (PaperButton) findViewById(R.id.button_language_rec_rate);
+        speechRecRate.setOnClickListener(new DelayClickListener(mDelay) {
             @Override
             public void doClick(View v) {
                 SpeechRecRate.start(mContext);
@@ -75,6 +78,22 @@ public class OptionActivity extends Activity {
                 LoginActivity.start(mContext);
                 VAccount.clear();
                 finish();
+            }
+        });
+
+        speechThreshold = (PaperButton) findViewById(R.id.button_speech_rec_threshold);
+        speechThreshold.setOnClickListener(new DelayClickListener(mDelay) {
+            @Override
+            public void doClick(View v) {
+                Threshold.start(OptionActivity.this);
+            }
+        });
+
+        calibration = (PaperButton) findViewById(R.id.button_calibration);
+        calibration.setOnClickListener(new DelayClickListener(mDelay) {
+            @Override
+            public void doClick(View v) {
+                CalibrateActivity.start(OptionActivity.this);
             }
         });
     }
