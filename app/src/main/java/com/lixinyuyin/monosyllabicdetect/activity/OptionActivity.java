@@ -96,6 +96,7 @@ public class OptionActivity extends Activity {
                 CalibrateActivity.start(OptionActivity.this);
             }
         });
+
     }
 
     public static void start(Context context) {

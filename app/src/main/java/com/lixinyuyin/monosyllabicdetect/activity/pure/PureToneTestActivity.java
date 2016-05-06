@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -30,18 +31,18 @@ public class PureToneTestActivity extends Activity implements OnClickListener {
 
     public static final int SAMPLE_RATE_HZ = 44104;
     public static final int CHANNEL = AudioFormat.CHANNEL_OUT_MONO;
-    public static final int SAMPLE_BIT = AudioFormat.ENCODING_PCM_16BIT;
+    public static final int SAMPLE_BIT = AudioFormat.ENCODING_PCM_FLOAT;
 
     private int[] mVoiceFrequency = {125, 250, 500, 750, 1000, 1500, 2000, 3000, 4000, 5000, 8000};// unit Hz
-    private short maxAmp = Short.MAX_VALUE;
-    private int mFrameLength = SAMPLE_RATE_HZ;
-    private short[][] mData = new short[mVoiceFrequency.length][mFrameLength];
+    //    private short maxAmp = Short.MAX_VALUE;
+    private int mFrameLength = (int) (0.1 * SAMPLE_RATE_HZ);
+    private float[][][] mData = new float[mVoiceFrequency.length][100][mFrameLength];
     private int mBufferSize = AudioTrack.getMinBufferSize(SAMPLE_RATE_HZ, CHANNEL, SAMPLE_BIT);
 
     private AudioTrack audioTrack;
     private AudioManager mAudioManager;
 
-    private float mVolume = 0.5f;
+    private float mVolume = 1.0f;
     private float mVolumeStep;
     private float mMaxVolume;
     private int mVolumeIndex = 1;// 1 ~ 100
@@ -66,6 +67,8 @@ public class PureToneTestActivity extends Activity implements OnClickListener {
     private SinWavTask mWavTask;
 
     public static String mUserName;
+
+    private short dataAmp = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +95,7 @@ public class PureToneTestActivity extends Activity implements OnClickListener {
         minusButton = (Button) findViewById(R.id.button_fre_minus);
         minusButton.setOnClickListener(this);
         playButton = (Button) findViewById(R.id.button_play);
+        playButton.setVisibility(View.INVISIBLE);
         playButton.setOnClickListener(this);
 
         volumeMin = (Button) findViewById(R.id.button_volume_min);
@@ -109,11 +113,7 @@ public class PureToneTestActivity extends Activity implements OnClickListener {
             public void onValueChanged(int value) {
                 //                setVolume(value);
                 mVolumeIndex = 10 * value + volumeSliderx.getValue();
-                mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,mVolumeIndex,0);
-                //                audioTrack.setVolume(mVolumeIndex * mVolumeStep);
-//                audioTrack.setStereoVolume(mVolumeIndex * mVolumeStep, mVolumeIndex * mVolumeStep);
-                //                mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mVolumeIndex, 0);
-                refreshInfo();
+                volumeChanged();
             }
         });
         volumeSliderx = (Slider) findViewById(R.id.slider_volume_x);
@@ -121,9 +121,7 @@ public class PureToneTestActivity extends Activity implements OnClickListener {
             @Override
             public void onValueChanged(int value) {
                 mVolumeIndex = value + 10 * volumeSliderX.getValue();
-                mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,mVolumeIndex,0);
-//                audioTrack.setStereoVolume(mVolumeIndex * mVolumeStep, mVolumeIndex * mVolumeStep);
-                refreshInfo();
+                volumeChanged();
             }
         });
 
@@ -132,19 +130,26 @@ public class PureToneTestActivity extends Activity implements OnClickListener {
 
     private void initData() {
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
+        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 60, 0);
 
         audioTrack =
                 new AudioTrack(AudioManager.STREAM_MUSIC, SAMPLE_RATE_HZ, CHANNEL, SAMPLE_BIT,
                         mBufferSize * 2, AudioTrack.MODE_STREAM);
         //        audioTrack.setVolume(mVolume);
-        audioTrack.setStereoVolume(mVolume, mVolume);
-        mMaxVolume = audioTrack.getMaxVolume();
-        mVolumeStep = mMaxVolume / 100;
+        //        audioTrack.setStereoVolume(mVolume, mVolume);
+        //        mMaxVolume = audioTrack.getMaxVolume();
+        //        mMaxVolume = 100;
+        mMaxVolume = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        //        mVolumeStep = mMaxVolume / 100;
         audioTrack.play();
-        calculateWavSignal();
+        new CalWavTask().execute();
     }
 
+    private void volumeChanged() {
+        //        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,mVolumeIndex,0);
+        //                audioTrack.setStereoVolume(mVolumeIndex * mVolumeStep, mVolumeIndex * mVolumeStep);
+        refreshInfo();
+    }
 
     @Override
     public void onClick(View v) {
@@ -204,7 +209,8 @@ public class PureToneTestActivity extends Activity implements OnClickListener {
         graphData.setName(mUserName);
         mGraphDataDao.add(graphData);
         mGraphDataDao.close();
-        Toast.makeText(this, "Save Succeed!", Toast.LENGTH_SHORT).show();
+        //        Toast.makeText(this, "Save Succeed!", Toast.LENGTH_SHORT).show();
+        graphData.saveParams();
     }
 
     private void frequencyChanged() {
@@ -222,14 +228,6 @@ public class PureToneTestActivity extends Activity implements OnClickListener {
                 mVolumeIndex));
     }
 
-    private void calculateWavSignal() {
-        for (int i = 0; i < mVoiceFrequency.length; i++) {
-            double w = 2.0 * Math.PI * mVoiceFrequency[i] / SAMPLE_RATE_HZ;
-            for (int j = 0; j < mFrameLength; j++) {
-                mData[i][j] = (short) (maxAmp * Math.sin(w * j));
-            }
-        }
-    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -244,17 +242,6 @@ public class PureToneTestActivity extends Activity implements OnClickListener {
                 break;
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-    private void setVolume() {
-        if (mVolumeIndex > 100) {
-            mVolumeIndex = 100;
-        }
-        if (mVolumeIndex < 1) {
-            mVolumeIndex = 1;
-        }
-        volumeSliderX.setValue(mVolumeIndex);
-        refreshInfo();
     }
 
     private void showMenuPopwindow() {
@@ -289,6 +276,31 @@ public class PureToneTestActivity extends Activity implements OnClickListener {
 
     }
 
+    class CalWavTask extends AsyncTask<String, Integer, Integer> {
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            playButton.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Integer doInBackground(String... params) {
+            double pa = Math.pow(2, -0.5) * 1E-5;
+            for (int k = 0; k < mData[0].length; k++) {
+                double f = Math.pow(10, (double) (k + 1) / 20);
+                double amp = 1.4142 * pa * f;
+                for (int i = 0; i < mVoiceFrequency.length; i++) {
+                    double w = 2.0 * Math.PI * mVoiceFrequency[i] / (double) SAMPLE_RATE_HZ;
+                    for (int j = 0; j < mFrameLength; j++) {
+                        mData[i][k][j] = (float) (amp * Math.sin(w * j));
+                    }
+                }
+            }
+            return null;
+        }
+    }
+
     class SinWavTask extends Thread {
 
         private int mFrequencyIndex = 0;
@@ -303,30 +315,9 @@ public class PureToneTestActivity extends Activity implements OnClickListener {
         public void run() {
             while (isRunning) {
                 // 将波形数据分段送入 audioTrack ,使切换更加迅速灵敏
-                int frameLength = mData[mFrequencyIndex].length / 8;
+                int frameLength = mData[mFrequencyIndex][0].length;
                 if (!isPause) {
-                    audioTrack.write(mData[mFrequencyIndex], 0, frameLength);
-                }
-                if (!isPause) {
-                    audioTrack.write(mData[mFrequencyIndex], frameLength, frameLength);
-                }
-                if (!isPause) {
-                    audioTrack.write(mData[mFrequencyIndex], 2 * frameLength, frameLength);
-                }
-                if (!isPause) {
-                    audioTrack.write(mData[mFrequencyIndex], 3 * frameLength, frameLength);
-                }
-                if (!isPause) {
-                    audioTrack.write(mData[mFrequencyIndex], 4 * frameLength, frameLength);
-                }
-                if (!isPause) {
-                    audioTrack.write(mData[mFrequencyIndex], 5 * frameLength, frameLength);
-                }
-                if (!isPause) {
-                    audioTrack.write(mData[mFrequencyIndex], 6 * frameLength, frameLength);
-                }
-                if (!isPause) {
-                    audioTrack.write(mData[mFrequencyIndex], 7 * frameLength, frameLength);
+                    audioTrack.write(mData[mFrequencyIndex][mVolumeIndex - 1], 0, frameLength, AudioTrack.WRITE_BLOCKING);
                 }
             }
         }
