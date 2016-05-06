@@ -52,15 +52,25 @@
     <string name="user_info_hint">,欢迎使用^_^</string>
     <string name="account_switch">账户切换</string>
     <string name="language_recognize_rate">言语识别率测试</string>
+    <string name="speech_recognize_threshold">言语识别阈测试</string>
     <!-- Option Activity End-->
 
     <!-- Language Recognize Rate Start-->
     <string name="next">NextWord</string>
-    <string name="result" formatted="false">本次测试共有%1$d项，回答正确%2$d项，正确率%3$.1f%%</string>
+    <string name="result_speech_rate" formatted="false">本次测试共有%1$d项，回答正确%2$d项，言语识别率：%3$.1f%%</string>
+    <string name="result_speech_threshold" formatted="false">言语识别阈：初始声强 - %1$d + 2.5dB(校正因子)</string>
     <!-- Language Recognize Rate End-->
+
+    <!-- Slider Dialog Start-->
+    <string name="selected_num_hint">已选择%1$d个词组</string>
+    <!-- Slider Dialog End-->
 
     <!-- comm start-->
     <string name="comm_copyright">Copyright© 2015-2020 南京宇音力新电子科技有限公司.\nAll Rights Reserved.</string>
+    <string name="title_activity_calibrate">CalibrateActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
     <!-- comm end-->
 
 </resources>

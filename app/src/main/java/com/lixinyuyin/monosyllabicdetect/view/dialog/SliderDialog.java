@@ -27,6 +27,7 @@ public class SliderDialog extends Dialog {
     private View contentView;
 
     private TextView titleTextView;
+    private TextView hintTextView;
     private Slider slider;
     private ButtonFlat sureButton;
     private ButtonFlat cancelButton;
@@ -73,13 +74,16 @@ public class SliderDialog extends Dialog {
         slider = (Slider) findViewById(R.id.slider);
         slider.setMin(1);
         slider.setMax(sliderMaxNum);
+        slider.setOnValueChangedListener(new Slider.OnValueChangedListener() {
+            @Override
+            public void onValueChanged(int value) {
+                hintTextView.setText(String.format(mContext.getString(R.string.selected_num_hint), value));
+            }
+        });
         sureButton = (ButtonFlat) findViewById(R.id.button_accept);
         sureButton.setTextSize(16);
         sureButton.setRippleColor(mContext.getResources().getColor(R.color.black_300));
-
-        cancelButton = (ButtonFlat) findViewById(R.id.button_cancel);
-        cancelButton.setTextSize(16);
-        cancelButton.setRippleColor(mContext.getResources().getColor(R.color.black_300));
+        hintTextView = (TextView) findViewById(R.id.textView_choiceHint);
     }
 
     @Override

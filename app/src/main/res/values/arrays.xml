@@ -53,4 +53,31 @@
         <item>zi子 </item>
     </string-array>
 
+    <string-array name="Male_track07_words">
+        <item>参加</item>
+        <item>出来</item>
+        <item>代表</item>
+        <item>但是</item>
+        <item>得到</item>
+        <item>发生</item>
+        <item>各种</item>
+        <item>工作</item>
+        <item>环保</item>
+        <item>经过</item>
+        <item>可以</item>
+        <item>利用</item>
+        <item>民族</item>
+        <item>去年</item>
+        <item>任何</item>
+        <item>水平</item>
+        <item>特别</item>
+        <item>同志</item>
+        <item>伟大</item>
+        <item>许多</item>
+        <item>颜色</item>
+        <item>要求</item>
+        <item>艺术</item>
+        <item>自己</item>
+    </string-array>
+
 </resources>

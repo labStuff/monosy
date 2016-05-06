@@ -38,11 +38,11 @@ public class SpeechRecRate extends Activity implements View.OnClickListener, Med
 
     private final int mDelay = 500;
 
-    private List<Integer> originalWordsResId = Arrays.asList(R.raw.ai, R.raw.bi, R.raw.bu, R.raw.chan, R.raw.ci, R.raw.de, R.raw.dian, R.raw.diao, R.raw.ding,
-            R.raw.dong, R.raw.du, R.raw.duo, R.raw.fen, R.raw.ge, R.raw.guo, R.raw.hai, R.raw.he, R.raw.ji, R.raw.jie, R.raw.jing, R.raw.ke,
-            R.raw.le, R.raw.li, R.raw.ma, R.raw.neng, R.raw.pa, R.raw.qi, R.raw.qu, R.raw.ri, R.raw.se, R.raw.shan, R.raw.shang, R.raw.shi,
-            R.raw.shu, R.raw.tiao, R.raw.tong, R.raw.wei, R.raw.xia, R.raw.xiang, R.raw.yan, R.raw.yin, R.raw.yong, R.raw.you, R.raw.zao,
-            R.raw.ze, R.raw.zhe, R.raw.zhi, R.raw.zhi2, R.raw.zhong, R.raw.zi);
+    private List<Integer> originalWordsResId = Arrays.asList(R.raw.track01_male_ai, R.raw.track01_male_bi, R.raw.track01_male_bu, R.raw.track01_male_chan, R.raw.track01_male_ci, R.raw.track01_male_de, R.raw.track01_male_dian, R.raw.track01_male_diao, R.raw.track01_male_ding,
+            R.raw.track01_male_dong, R.raw.track01_male_du, R.raw.track01_male_duo, R.raw.track01_male_fen, R.raw.track01_male_ge, R.raw.track01_male_guo, R.raw.track01_male_hai, R.raw.track01_male_he, R.raw.track01_male_ji, R.raw.track01_male_jie, R.raw.track01_male_jing, R.raw.track01_male_ke,
+            R.raw.track01_male_le, R.raw.track01_male_li, R.raw.track01_male_ma, R.raw.track01_male_neng, R.raw.track01_male_pa, R.raw.track01_male_qi, R.raw.track01_male_qu, R.raw.track01_male_ri, R.raw.track01_male_se, R.raw.track01_male_shan, R.raw.track01_male_shang, R.raw.track01_male_shi,
+            R.raw.track01_male_shu, R.raw.track01_male_tiao, R.raw.track01_male_tong, R.raw.track01_male_wei, R.raw.track01_male_xia, R.raw.track01_male_xiang, R.raw.track01_male_yan, R.raw.track01_male_yin, R.raw.track01_male_yong, R.raw.track01_male_you, R.raw.track01_male_zao,
+            R.raw.track01_male_ze, R.raw.track01_male_zhe, R.raw.track01_male_zhi, R.raw.track01_male_zhi2, R.raw.track01_male_zhong, R.raw.track01_male_zi);
     private List<Integer> shuffledList = new ArrayList<>();
 
     private String[] wordsResContent;
@@ -207,7 +207,7 @@ public class SpeechRecRate extends Activity implements View.OnClickListener, Med
     }
 
     private void showResult() {
-        playingHint.setText(String.format(getString(R.string.result), mTestNum, rightCounter, (float) 100 * rightCounter / mTestNum));
+        playingHint.setText(String.format(getString(R.string.result_speech_rate), mTestNum, rightCounter, (float) 100 * rightCounter / mTestNum));
         playingHint.setVisibility(View.VISIBLE);
         playImageView.setVisibility(View.INVISIBLE);
         choiceView.setVisibility(View.INVISIBLE);
